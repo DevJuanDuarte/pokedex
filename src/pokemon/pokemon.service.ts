@@ -81,11 +81,15 @@ export class PokemonService {
     // const pokemon = await this.findOne(id);
     // await pokemon.deleteOne();
     // return {id};
-    const result =this.pokemonModel.findByIdAndDelete(id);
-    return result;
+    // const result = await this.pokemonModel.findByIdAndDelete(id);
+    const { deletedCount } = await this.pokemonModel.deleteOne({ _id: id });
+    if (deletedCount === 0) {
+      throw new BadRequestException(`El pokemon con el id "${id}" no funciona`);
+    }
+    return;
   }
 
-  private hadleExceptions (error: any){
+  private hadleExceptions(error: any) {
     if (error.code === 11000) {
       throw new BadRequestException(`El pokemon ya existe en la bd ${JSON.stringify(error.keyValue)}`)
     }
