@@ -5,6 +5,7 @@ import { ValidationPipe } from '@nestjs/common';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  //PREFIJO GLOBAL
   app.setGlobalPrefix('api/v2');
 
   //Se crea el ValidationPipe incluyendo el whitelist y el forbidWhitelisted

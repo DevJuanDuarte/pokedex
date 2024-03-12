@@ -1,4 +1,3 @@
-//Se instalar class-validator y class-transformer: npm i --save class-validator class-transformer
 import { IsInt, IsPositive, IsString, Min, MinLength } from 'class-validator';
 
 export class CreatePokemonDto {

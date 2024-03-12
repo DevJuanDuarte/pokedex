@@ -1,11 +1,13 @@
 import { join } from 'path';//En node
 import { Module } from '@nestjs/common';
-import { ServeStaticModule } from '@nestjs/serve-static';
-import { PokemonModule } from './pokemon/pokemon.module';
 import { MongooseModule } from '@nestjs/mongoose';
+import { PokemonModule } from './pokemon/pokemon.module';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
+
+    //SERVIR CONTENIDO ESTATICO!
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),

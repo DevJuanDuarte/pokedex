@@ -1,9 +1,10 @@
 html, body {
   padding: 20px;
+  background-color: grey;
 }
 
 h1 {
   font-size: 20px;
   color: white;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: 'JetBrains Mono', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
