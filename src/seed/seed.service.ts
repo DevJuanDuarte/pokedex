@@ -4,6 +4,7 @@ import { PokeResponse } from './interfaces/poke-response.interface';
 import { InjectModel } from '@nestjs/mongoose';
 import { Pokemon } from 'src/pokemon/entities/pokemon.entity';
 import { Model } from 'mongoose';
+import { Pokeroke } from './interfaces/pokemon.interface';
 
 @Injectable()
 export class SeedService {
@@ -17,15 +18,25 @@ export class SeedService {
   private readonly axios: AxiosInstance = axios;
 
   async ejecutarSeed() {
-    const {data} = await this.axios.get<PokeResponse>('https://pokeapi.co/api/v2/pokemon?limit=10')
 
-    data.results.forEach(async({name, url})=> {
+    await this.pokemonModel.deleteMany({});
+
+    const { data } = await this.axios.get<PokeResponse>('https://pokeapi.co/api/v2/pokemon?limit=1000')
+
+    const pokemonToInsert:Pokeroke[] = [];
+
+    data.results.forEach(async ({ name, url }) => {
       const segments = url.split('/');
       const no = +segments[segments.length - 2]
       //4. Se agrega la constante pokemon que ejecuta desde el servicio el metodo create y colocamos la desestructuracion de name y no
-      const pokemon = await this.pokemonModel.create({name, no});
-      
-    })
+      // const pokemon = await this.pokemonModel.create({ name, no });
+
+      pokemonToInsert.push({ name, no });
+
+    });
+
+    this.pokemonModel.insertMany(pokemonToInsert);
+
     return 'Semilla ejecutada';
   }
 
